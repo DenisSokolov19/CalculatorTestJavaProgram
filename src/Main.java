@@ -51,7 +51,7 @@ public class Main {
 				else if (isThereANumbers && isThereAOperands)
 				{int p = c.NumbersCalculating(i); System.out.println(p + "\n");}
 				else if (isThereARomans && isThereAOperands)
-				{int p = c.RomansToArabic(i); System.out.println(p + "\n");}
+				{String p = c.RomansToArabic(i); System.out.println(p + "\n");}
 			}
 		} while(true); //Программа работает по кругу, до тех пор пока пользователь не введёт слово 'exit'
 	}
