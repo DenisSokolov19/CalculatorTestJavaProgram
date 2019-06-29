@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -44,6 +43,10 @@ public class Parsing {
 	    map.put(1, "I");
 	}
 	
+	/* В методе parser исходная строка разбивается на массив символов, и посимвольно заносится в 
+	 * чистый ArrayList.
+	 */
+	
 	String parser(String input) throws Exception{
 		Calculation n = new Calculation();
 		int x = 0;
@@ -66,11 +69,19 @@ public class Parsing {
 		        } else if ((new String("" + c)).matches("[,.]+")) { 
 		        	throw new IllegalArgumentException();}
 	        } 
-	        if (haveRoman) {
+	    
+	  //Если мы нашли Римские цифры но не нашли Арабские, мы отправляем готовый лист в метод romansParser 
+	    
+	        if (haveRoman) { 
 	        	sequence = romansParser(sequence);
+	  /* Возвращается массив, например [50, *, 10] 
+	   * нам надо привести его к виду [5, 0, *, 1, 0] т.к. метод sequence.get(0).matches("[\\d]")
+	   * в функции getNextNumber класса Calculation, почему то плохо работает с элементами массива 
+	   * из 2х и более цифр. Массив отправляется в функцию listSplit. 
+	   */
 	        	sequence = listSplit(sequence);
 	        	x = n.NumbersCalculation(sequence);
-		        String numberAsString = intToRoman(x);
+		        String numberAsString = intToRoman(x); //преобразовываем число в Римскую цифру
 		        return numberAsString;
 	        }
 	        x = n.NumbersCalculation(sequence);
@@ -81,9 +92,10 @@ public class Parsing {
 	ArrayList<String> romansParser(ArrayList<String> sequence){ 
 		ArrayList<String> sequence2 = new ArrayList<>();
 	    while (true) {
-	    	try {
+	    	try { //Заносим в строку поочереди число и операнд. 
 	    		sequence2.add(RomansToArabic(sequence));
 	    		sequence2.add(getNextOperator(sequence));
+	    		//Когда в массиве больше не остаётся символов выбрасывается исключение
 	    	} catch (java.lang.IndexOutOfBoundsException e) 
 	    		{return sequence2;}
 	    }
@@ -96,7 +108,10 @@ public class Parsing {
 	    }
 	    return null;
 	}	    
-	
+	/*В методе RomansToArabic мы также посимвольно составляем Римскую цифру до знака операнда,
+	 *затем функцией String.join делаем из массива строку, и отправляем её в метод RomansTranslation
+	 *где преобразовываем в арабское число.
+	 */
 		String RomansToArabic(ArrayList<String> sequence) {
 			ArrayList<String> sequence2 = new ArrayList<String>();
 			while (true) {

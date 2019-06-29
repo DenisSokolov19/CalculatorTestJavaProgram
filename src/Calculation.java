@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.TreeMap;
 
 public class Calculation {
 
@@ -27,11 +24,14 @@ public class Calculation {
 	                    number1 /= number2;
 	                    break;
 	            }
+	          //Когда в массиве больше не остаётся символов выбрасывается исключение
 	        } catch (java.lang.IndexOutOfBoundsException e) { 
 	            return number1;
 	        }
 	    }
 	}
+	
+	//В методе listToInt мы преобразовываем массив чисел в одно int число.
 	
 	static int listToInt(ArrayList<Integer> nextNumber) {
 	    int result = 0;

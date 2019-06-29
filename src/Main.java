@@ -9,7 +9,7 @@ public class Main {
 			String i = inputLine.nextLine();
 			boolean exit = p.exit(i);
 			if (exit) Runtime.getRuntime().exit(0);
-			String n = p.parser(i);
+			String n = p.parser(i); //Возвращаем строку, потому что так можно получить и римские и арабские числа. 
 			System.out.println("************");
 			System.out.println(n + "\n\n");
 		} while(true); }
